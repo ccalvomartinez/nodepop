@@ -21,3 +21,4 @@ mongoose.connect('mongodb://localhost/cursonode');
 
 // Leer los datos del fichero de configuración rellenar la base de datos en caso 
 //necesario
+

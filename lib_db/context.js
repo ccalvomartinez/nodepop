@@ -8,7 +8,7 @@ const Agente = require('../models/Ad');
 module.exports.addUser = function (name, email, password, callback) { 
         //
     };
-module.exports.listAds = function (filter) { };
+module.exports.listAds = function (filter, limit, skip, fields, sort, callback) { };
     
 module.exports.getUserByEmail = function (email) { };
 module.exports.validateUser = function (email, password) { };
