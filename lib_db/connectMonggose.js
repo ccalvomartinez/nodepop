@@ -17,8 +17,5 @@ conn.once('open', () => {
 // Conectamos
 mongoose.connect('mongodb://localhost/cursonode');
 
-// No necesito exportar nada ya que mongoose se encarga de guardar la conexión
 
-// Leer los datos del fichero de configuración rellenar la base de datos en caso 
-//necesario
 
