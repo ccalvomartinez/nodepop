@@ -40,11 +40,15 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-  console.log('Error final', err);
+ // console.log('Error final', err);
   res.status(err.status || 500);
 
   if (isAPI(req)) {
-    res.json(err);
+    if (err instanceof CustomError) {
+      res.json(err.toPrettyObject());
+    } else { 
+      res.json({ succes: false, error: err.message });
+    }
     return;
   }
   // set locals, only providing error in development

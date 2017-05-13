@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const Ad = require('../models/Ad');
 const User = require('../models/User');
-const customError = require('../lib/customError');
+const CustomError = require('../lib/CustomError');
 const cryptografy = require('../lib/cryptografy');
 
     // Callback o promesa para todas las funciones que voy a crear
@@ -48,7 +48,7 @@ module.exports.listAds = function (filter, options) {
         query.select('-__v');
         return query.exec();
     } catch (err) { 
-        throw customError('Error al generar la consulta', err);
+        throw new CustomError('Error al generar la consulta', err);
     }
    
 };
@@ -66,8 +66,8 @@ module.exports.addUser = async function (name, email, password) {
             Object.keys(valErr.errors).forEach(function (key, index) {
                 message += valErr.errors[key].message + ' ';
             })
-
-            throw customError(message,409);
+            
+            throw new (message,409);
         })    
         .then(() => {
             return user.save();
@@ -81,21 +81,15 @@ module.exports.addUser = async function (name, email, password) {
 };
 module.exports.getUserByEmail = function (email) { };
 module.exports.validateUser = async function (email, password) { 
-    console.log('Email', email);
-    console.log('Password', password);
     const user = await User.findOne({ email: email });
-    console.log('User', user);  
     if (!user) { 
-        throw customError('No tenemos un usuario registrado con ese email', 409);
+        throw new CustomError('No tenemos un usuario registrado con ese email', 409);
     }
  
     const esPasswordValido = await cryptografy.validateHash(password, user.password);
 
     if (esPasswordValido) {
-        cryptografy.getToken(user, function (err, token) {
-            if (err) { 
-                throw customError('Error al generar el token');
-            }
+        const token = cryptografy.getToken(user);
             return {
                 user: {
                     name: user.name,
@@ -103,8 +97,7 @@ module.exports.validateUser = async function (email, password) {
                 },
                 token: token
             }
-        });
     } else { 
-        throw customError('La contraseña no es correcta',409);
+        throw new CustomError('La contraseña no es correcta',409);
     }
 };

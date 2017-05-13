@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const customError = require('../../lib/customError');
+const CustomError = require('../../lib/CustomError');
 const context = require('../../lib_db/context');
 
 /* POST /apiv1/users */
@@ -17,7 +17,7 @@ router.post('/', function (req, res, next) {
     })
     .catch(err => { 
     
-      next(customError('Error al registrar al usuario',null, err));
+      next(new CustomError('Error al registrar al usuario', err));
     });
 });
 
@@ -35,7 +35,7 @@ router.get('/authenticate', function (req, res, next) {
     })
     .catch(err => {
 
-      next(customError('Error al autenticar al usuario', null, err));
+      next(new CustomError('Error al autenticar al usuario', err));
     });
 });
 
@@ -45,13 +45,13 @@ function getUserData(body) {
   const password = body.password;
 
   if (!name) { 
-    throw customError("El nombre no puede estar vacío");
+    throw new CustomError("El nombre no puede estar vacío", 409);
   }
   if (!email) { 
-    throw customError("El email no puede estar vacío");
+    throw new CustomError("El email no puede estar vacío", 409);
   }
   if (!password) { 
-    throw customError("El password no pude estar vacío");
+    throw new CustomError("El password no pude estar vacío", 409);
   }
   return {
     name: name,
@@ -65,10 +65,10 @@ function getAuthenticationData(query) {
   const password = query.password;
 
   if (!email) {
-    throw customError("El email no puede estar vacío");
+    throw new CustomError("El email no puede estar vacío", 409);
   }
   if (!password) {
-    throw customError("El password no pude estar vacío");
+    throw new CustomError("El password no pude estar vacío", 409);
   }
   return {
     email: email,

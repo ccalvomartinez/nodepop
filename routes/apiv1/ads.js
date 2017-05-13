@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const context = require('../../lib_db/context');
-const customError = require('../../lib/customError');
+const CustomError = require('../../lib/CustomError');
 
 // AUTENTICACIÓN JWT
 const jwtAuth = require('../../lib/jwtAuth');
@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
 
     } catch (err) { 
         
-        next(customError("Error en la query string",409,err));
+        next(new CustomError("Error en la query string", 409, err));
         return;
     }
 
@@ -40,7 +40,7 @@ router.get('/', function (req, res, next) {
         });
     })
         .catch(err => {
-            next(customError("Error al recuperar los datos",err));
+            next(new CustomError("Error al recuperar los datos", err));
             return;
          });
 });
@@ -63,7 +63,7 @@ function getFilter(req) {
         } else if (sale.toLowerCase() === 'false') {
             filter.sale = false;
         } else {
-            throw customError('Error en el filtro de venta');
+            throw new CustomError('Error en el filtro de venta', 409);
             
         }
     }
@@ -83,7 +83,7 @@ function getFilter(req) {
             }
         } else {
             console.log('Error');
-            throw customError('El filtro de precio no es correcto');
+            throw new CustomError('El filtro de precio no es correcto',409);
             
         }
 
@@ -101,14 +101,14 @@ function getOptions(req) {
         if (start) {
             options.start = start;
         } else { 
-            throw new customError('La opción de inicio no es correcta');
+            throw new CustomError('La opción de inicio no es correcta',409);
         }
     }
     if (req.query.limit) { 
         if (limit) {
             options.limit = limit;
         } else { 
-            throw customError('La opción de límite no es correcta');
+            throw new CustomError('La opción de límite no es correcta',409);
         }
     }
     if (sort) { 

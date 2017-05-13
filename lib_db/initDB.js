@@ -3,7 +3,6 @@ require('./connectMonggose');
 const mongoose = require('mongoose');
 const Ad = require('../models/Ad');
 const User = require('../models/User');
-const customError = require('../lib/customError');
 
 // Leer los datos del fichero de configuración rellenar la base de datos en caso 
 //necesario
