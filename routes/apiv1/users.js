@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const CustomError = require('../../lib/CustomError');
 const context = require('../../lib_db/context');
+const winston = require('winston');
 
 /* POST /apiv1/users */
 router.post('/', function (req, res, next) {
   const userData = getUserData(req.body);
   context.addUser(userData.name, userData.email, userData.password)
     .then(user => { 
+      winston.info('Usuario registrado. Nombre: %s, Email: %s', user.name, user.email);
         res.json({
           success: true,
           result: {
@@ -25,6 +27,8 @@ router.get('/authenticate', function (req, res, next) {
   const userData = getAuthenticationData(req.query);
   context.validateUser( userData.email, userData.password)
     .then((tokenData) => {
+      winston.info('Usuario autenticado. Nombre: %s, Email: %s', tokenData.user.name, tokenData.user.email);
+ 
       res.json({
         success: true,
         result: {

@@ -4,6 +4,19 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var winston = require('winston');
+
+//Configuramos la utilidad de log
+
+winston.add(winston.transports.File, {
+  name: 'error-file',
+  filename: './logs/errors.log',
+  handleExceptions: true,
+  humanReadableUnhandledException: true
+});
+
+// Cargamos Custom Errors
+const CustomError = require('./lib/CustomError');
 
 //Conectamos a la base de datos y la poblamos si así lo pide el fichero de configuración
 require('./lib_db/initDB');
@@ -44,6 +57,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
 
   if (isAPI(req)) {
+    winston.error('Error %s, status: %d', err.message, err.status);
     if (err instanceof CustomError) {
       res.json(err.toPrettyObject());
     } else { 

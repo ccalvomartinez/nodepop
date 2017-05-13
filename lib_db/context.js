@@ -48,7 +48,8 @@ module.exports.listAds = function (filter, options) {
         query.select('-__v');
         return query.exec();
     } catch (err) { 
-        throw new CustomError('Error al generar la consulta', err);
+        throw new ('Error al generar la consulta', err);
+
     }
    
 };
@@ -83,6 +84,7 @@ module.exports.getUserByEmail = function (email) { };
 module.exports.validateUser = async function (email, password) { 
     const user = await User.findOne({ email: email });
     if (!user) { 
+        
         throw new CustomError('No tenemos un usuario registrado con ese email', 409);
     }
  
