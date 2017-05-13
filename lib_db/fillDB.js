@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Ad = require('../models/Ad');
 const User = require('../models/User');
 //Controlaremos los errores a la salida de este método.
-module.exports.fillDB= function(){
+module.exports= function(){
     // Leer ficheros
     const ads = require('./adsInitData.json');
 //TODO: Async await

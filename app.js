@@ -5,9 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+//Conectamos a la base de datos y la poblamos si así lo pide el fichero de configuración
+require('./lib_db/initDB');
 
+var index = require('./routes/index');
+var users = require('./routes/apiv1/users');
+var ads = require('./routes/apiv1/ads');
 
 
 var app = express();
@@ -22,11 +25,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use('/apiv1/ads/images',express.static(path.join(__dirname, 'public/images')));
 
 app.use('/', index);
-app.use('/users', users);
-
+app.use('/apiv1/users', users);
+app.use('/apiv1/ads', ads);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -35,14 +39,24 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
+  console.log('Error final', err);
+  res.status(err.status || 500);
+
+  if (isAPI(req)) {
+    res.json(err);
+    return;
+  }
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
   res.render('error');
 });
+
+function isAPI(req) {
+  return req.originalUrl.indexOf('/apiv') === 0;
+}
 
 module.exports = app;
