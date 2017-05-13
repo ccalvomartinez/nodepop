@@ -12,7 +12,13 @@ winston.add(winston.transports.File, {
   name: 'error-file',
   filename: './logs/errors.log',
   handleExceptions: true,
-  humanReadableUnhandledException: true
+  humanReadableUnhandledException: true,
+  level: 'error'
+});
+winston.add(winston.transports.File, {
+  name: 'info-file',
+  filename: './logs/info.log',
+  level: 'info'
 });
 
 // Cargamos Custom Errors
