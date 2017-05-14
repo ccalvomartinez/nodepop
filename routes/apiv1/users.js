@@ -1,13 +1,15 @@
+'use strict';
+
 const express = require('express');
 const router = express.Router();
 const CustomError = require('../../lib/CustomError');
-const context = require('../../lib_db/context');
+const contextModel = require('../../lib_db/context');
 const winston = require('winston');
 
 /* POST /apiv1/users */
 router.post('/', function (req, res, next) {
   const userData = getUserData(req.body);
-  context.addUser(userData.name, userData.email, userData.password)
+  contextModel.addUser(userData.name, userData.email, userData.password)
     .then(user => { 
       winston.info('Usuario registrado. Nombre: %s, Email: %s', user.name, user.email);
         res.json({
@@ -25,7 +27,7 @@ router.post('/', function (req, res, next) {
 
 router.get('/authenticate', function (req, res, next) {
   const userData = getAuthenticationData(req.query);
-  context.validateUser( userData.email, userData.password)
+  contextModel.validateUser( userData.email, userData.password)
     .then((tokenData) => {
       winston.info('Usuario autenticado. Nombre: %s, Email: %s', tokenData.user.name, tokenData.user.email);
  
@@ -60,8 +62,8 @@ function getUserData(body) {
   return {
     name: name,
     email: email,
-    password:password
-  }
+    password: password
+  };
 }
 
 function getAuthenticationData(query) {
@@ -77,6 +79,6 @@ function getAuthenticationData(query) {
   return {
     email: email,
     password: password
-  }
+  };
 }
 module.exports = router;

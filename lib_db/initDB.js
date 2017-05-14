@@ -1,8 +1,7 @@
-// Conectamos a la BD y rellenamos la BD si está en el fichero de configuración 
+'use strict';
+// Conectamos a la BD y rellenamos la BD si está en el fichero de configuración
 require('./connectMonggose');
-const mongoose = require('mongoose');
-const Ad = require('../models/Ad');
-const User = require('../models/User');
+
 
 // Leer los datos del fichero de configuración rellenar la base de datos en caso 
 //necesario

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const mongoose = require('mongoose');
 
@@ -12,9 +12,9 @@ conn.on('error', (err) => {
     process.exit(3);
 });
 
-conn.once('open', () => { 
+conn.once('open', () => {
     console.log('Conectado a MongoDB');
-})
+});
 // Conectamos
 mongoose.connect('mongodb://localhost/cursonode');
 

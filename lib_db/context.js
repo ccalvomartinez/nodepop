@@ -1,21 +1,18 @@
-// Conectamos a la BD y rellenamos la BD si está en el fichero de configuración 
+'use strict';
 
-const mongoose = require('mongoose');
+
 const Ad = require('../models/Ad');
 const User = require('../models/User');
 const CustomError = require('../lib/CustomError');
 const cryptografy = require('../lib/cryptografy');
 
-    // Callback o promesa para todas las funciones que voy a crear
-
 module.exports.listAds = function (filter, options) { 
-    let query;
     try { 
 
         let query = Ad.find();
         // FILTRO
         if (filter.tag) { 
-            query.where('tags').in([filter.tag])
+            query.where('tags').in([filter.tag]);
         }
     
         if (filter.sale === true) { 
@@ -52,20 +49,21 @@ module.exports.listAds = function (filter, options) {
         }
         return query.exec();
     } catch (err) { 
-        throw new ('Error al generar la consulta', err);
+        throw new CustomError('Error al generar la consulta', err);
 
     }
    
 };
 
 module.exports.setPictureUrl = function (ad, rootUrl) {
-    if (ad.picture) { 
+    if (ad.picture) {
         ad.picture = rootUrl + ad.picture;
     }
     return ad;
-}
+};
+
 module.exports.addUser = async function (name, email, password) {
-   let passwordHashed = await cryptografy.getHash(password)
+    let passwordHashed = await cryptografy.getHash(password);
     const user = new User({
         name: name,
         email: email,
@@ -74,12 +72,11 @@ module.exports.addUser = async function (name, email, password) {
     let createdUser = await user.validate()
         .catch(valErr => {
             let message = '';
-            console.log(valErr.errors);
-            Object.keys(valErr.errors).forEach(function (key, index) {
+            Object.keys(valErr.errors).forEach(function (key) {
                 message += valErr.errors[key].message + ' ';
-            })
+            });
             
-            throw new (message,409);
+            throw new CustomError(message, 409);
         })    
         .then(() => {
             return user.save();
@@ -91,7 +88,8 @@ module.exports.addUser = async function (name, email, password) {
     return createdUser;
   
 };
-module.exports.getUserByEmail = function (email) { };
+
+
 module.exports.validateUser = async function (email, password) { 
     const user = await User.findOne({ email: email });
     if (!user) { 

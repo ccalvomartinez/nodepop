@@ -1,10 +1,11 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var winston = require('winston');
+'use strict';
+
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const winston = require('winston');
 
 //Configuramos la utilidad de log
 
@@ -27,12 +28,12 @@ const CustomError = require('./lib/CustomError');
 //Conectamos a la base de datos y la poblamos si así lo pide el fichero de configuración
 require('./lib_db/initDB');
 
-var index = require('./routes/index');
-var users = require('./routes/apiv1/users');
-var ads = require('./routes/apiv1/ads');
+const index = require('./routes/index');
+const users = require('./routes/apiv1/users');
+const ads = require('./routes/apiv1/ads');
 
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,9 +48,9 @@ app.use(cookieParser());
 // Habilitamos CORS
 
 app.use(function (req, res, next) {
-  res.set("Access-Control-Allow-Origin", "*");
-  res.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.set("Access-Control-Allow-Headers", "Origin, X-Requested-With,Content- Type, Accept");
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With,Content- Type, Accept');
 next();
 });
 
@@ -62,10 +63,15 @@ app.use('/apiv1/ads', ads);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
+
+function isAPI(req) {
+  return req.originalUrl.indexOf('/apiv') === 0;
+}
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -73,8 +79,8 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
 
   if (isAPI(req)) {
-
-    winston.error('Error %s, status: %d', err.message, err.status);
+   
+     winston.error('Error %s, status: %d', err.message, err.status);
     
     if (err instanceof CustomError) {
       const culture = req.query.culture || req.body.culture;
@@ -93,8 +99,5 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-function isAPI(req) {
-  return req.originalUrl.indexOf('/apiv') === 0;
-}
 
 module.exports = app;
