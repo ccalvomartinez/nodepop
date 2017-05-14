@@ -45,7 +45,11 @@ module.exports.listAds = function (filter, options) {
         if (options.sort) { 
             query.sort(options.sort);
         }
-        query.select('-__v');
+        if (filter.fields) {
+            query.select(filter.fields.join(' '));
+        } else { 
+            query.select('-__v');
+        }
         return query.exec();
     } catch (err) { 
         throw new ('Error al generar la consulta', err);
@@ -53,6 +57,13 @@ module.exports.listAds = function (filter, options) {
     }
    
 };
+
+module.exports.setPictureUrl = function (ad, rootUrl) {
+    if (ad.picture) { 
+        ad.picture = rootUrl + ad.picture;
+    }
+    return ad;
+}
 module.exports.addUser = async function (name, email, password) {
    let passwordHashed = await cryptografy.getHash(password)
     const user = new User({
@@ -85,7 +96,7 @@ module.exports.validateUser = async function (email, password) {
     const user = await User.findOne({ email: email });
     if (!user) { 
         
-        throw new CustomError('No tenemos un usuario registrado con ese email', 409);
+        throw new CustomError('We do not have a registered user with that email', 409);
     }
  
     const esPasswordValido = await cryptografy.validateHash(password, user.password);
@@ -100,6 +111,6 @@ module.exports.validateUser = async function (email, password) {
                 token: token
             }
     } else { 
-        throw new CustomError('La contraseña no es correcta',409);
+        throw new CustomError('Password not valid',409);
     }
 };

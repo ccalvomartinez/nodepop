@@ -9,7 +9,7 @@ mongoose.Promise = global.Promise;
 // Nos suscribimos a los eventos que nos interesan
 conn.on('error', (err) => { 
     console.log('Error de conexión', err);
-    process.exit(1);
+    process.exit(3);
 });
 
 conn.once('open', () => { 

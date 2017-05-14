@@ -11,13 +11,14 @@ try {
     config = require('../config/config');
 } catch (err) {
     console.error('No se ha podido leer el fichero de configuración:', err);
-    process.exit(1);
+    process.exit(4);
 }
 if (config && config.loadDataToDb) {
     const fillDB = require('./fillDB');
 
     fillDB().then(() => { })
         .catch(err => {
-            process.exit(1);
+            console.error('Error:', err);
+            process.exit(5);
     });
 } 

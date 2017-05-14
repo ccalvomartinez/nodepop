@@ -1,0 +1,45 @@
+{
+    "We do not have a registered user with that email":{
+        "es": "No tenemos un usuario registrado con ese email"
+    },
+    "Password not valid":{
+        "es": "La contraseña no es correcta"
+    },
+    "Token not valid":{
+        "es": "Token no válido"
+    },
+    "Query string not valid":{
+        "es": "Error en la query string"
+    },
+    "Error while retrieving ads":{
+        "es": "Error al recuperar los anuncios"
+    },
+    "Sale filter not valid":{
+        "es": "El filtro de venta no es válido"
+    },
+    "Price filter is not valid":{
+        "es": "El filtro de precio no es válido"
+    },
+    "Start option is not valid":{
+        "es": "La opción de 'inicio' no es válida"
+    },
+    "Limit option is not valid":{
+        "es": "La opción de 'límite' no es válida"
+    },
+    "Error while registering user":{
+        "es": "Error al registrar al usuario"
+    },
+    "Error while authenticating user":{
+        "es": "Error al autenticar al usuario"
+    },
+    "Email cannot be empty":{
+        "es": "El email no puede estar vacio"
+    },
+    "Name cannot be empty":{
+        "es": "El nombre no puede estar vacío"
+    },
+    "Password cannot be empty":{
+        "es": "La contraseña no puede estar vacía"
+    }
+
+}

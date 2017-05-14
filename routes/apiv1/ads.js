@@ -21,13 +21,13 @@ router.get('/', function (req, res, next) {
 
     } catch (err) { 
         
-        next(new CustomError("Error en la query string", 409, err));
+        next(new CustomError('Query string not valid', 409, err));
         return;
     }
 
     context.listAds(filter, options).then((datos) => { 
         const datosWithPicture = datos.map(function (ad) {
-            ad.picture =  'http://' + req.header('host') + '/apiv1/ads/images/' + ad.picture;
+            context.setPictureUrl(ad,'http://' + req.header('host') + '/apiv1/ads/images/');
             return ad;
         });
         
@@ -40,7 +40,7 @@ router.get('/', function (req, res, next) {
         });
     })
         .catch(err => {
-            next(new CustomError("Error al recuperar los datos", err));
+            next(new CustomError('Error while retrieving ads', err));
             return;
          });
 });
@@ -51,6 +51,7 @@ function getFilter(req) {
     const sale = req.query.sale;
     const name = req.query.name;
     const price = req.query.price;
+    const fields = req.query.fields;
 
     let filter = {};
     if (tag) {
@@ -63,8 +64,7 @@ function getFilter(req) {
         } else if (sale.toLowerCase() === 'false') {
             filter.sale = false;
         } else {
-            throw new CustomError('Error en el filtro de venta', 409);
-            
+            throw new CustomError('Sale filter not valid', 409);
         }
     }
     if (name) {
@@ -82,12 +82,13 @@ function getFilter(req) {
                 filter.priceUntil = parseInt(priceUntil[0]);
             }
         } else {
-            console.log('Error');
-            throw new CustomError('El filtro de precio no es correcto',409);
-            
+            throw new CustomError('Price filter is not valid',409);
         }
-
     } 
+    if (fields) { 
+        const fields_arr = fields.split(',');
+        filter.fields = fields_arr;
+    }
     return filter;
 }
 
@@ -101,14 +102,14 @@ function getOptions(req) {
         if (start) {
             options.start = start;
         } else { 
-            throw new CustomError('La opción de inicio no es correcta',409);
+            throw new CustomError('Start option is not valid',409);
         }
     }
     if (req.query.limit) { 
         if (limit) {
             options.limit = limit;
         } else { 
-            throw new CustomError('La opción de límite no es correcta',409);
+            throw new CustomError('Limit option is not valid',409);
         }
     }
     if (sort) { 

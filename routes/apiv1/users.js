@@ -19,7 +19,7 @@ router.post('/', function (req, res, next) {
     })
     .catch(err => { 
     
-      next(new CustomError('Error al registrar al usuario', err));
+      next(new CustomError('Error while registering user', err));
     });
 });
 
@@ -39,7 +39,7 @@ router.get('/authenticate', function (req, res, next) {
     })
     .catch(err => {
 
-      next(new CustomError('Error al autenticar al usuario', err));
+      next(new CustomError('Error while authenticating user', err));
     });
 });
 
@@ -49,13 +49,13 @@ function getUserData(body) {
   const password = body.password;
 
   if (!name) { 
-    throw new CustomError("El nombre no puede estar vacío", 409);
+    throw new CustomError('Name cannot be empty', 409);
   }
   if (!email) { 
-    throw new CustomError("El email no puede estar vacío", 409);
+    throw new CustomError('Email cannot be empty', 409);
   }
   if (!password) { 
-    throw new CustomError("El password no pude estar vacío", 409);
+    throw new CustomError('Password cannot be empty', 409);
   }
   return {
     name: name,
@@ -69,10 +69,10 @@ function getAuthenticationData(query) {
   const password = query.password;
 
   if (!email) {
-    throw new CustomError("El email no puede estar vacío", 409);
+    throw new CustomError('Email cannot be empty', 409);
   }
   if (!password) {
-    throw new CustomError("El password no pude estar vacío", 409);
+    throw new CustomError('Password cannot be empty', 409);
   }
   return {
     email: email,
