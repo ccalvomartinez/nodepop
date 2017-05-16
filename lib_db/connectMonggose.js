@@ -18,7 +18,7 @@ conn.once('open', () => {
 
 // When the connection is disconnected
 conn.on('disconnected', function () {
-  console.log('Mongoose default connection to DB :' + db_server + ' disconnected');
+ // console.log('Mongoose default connection to DB :' + db_server + ' disconnected');
 });
 
 const gracefulExit = function() { 

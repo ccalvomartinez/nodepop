@@ -1,5 +1,5 @@
 'use strict';
-// Conectamos a la BD y rellenamos la BD si está en el fichero de configuración
+// Conectamos a la BD 
 require('./connectMonggose');
 
 

@@ -25,8 +25,8 @@ winston.add(winston.transports.File, {
 // Cargamos Custom Errors
 const CustomError = require('./lib/CustomError');
 
-//Conectamos a la base de datos y la poblamos si así lo pide el fichero de configuración
-require('./lib_db/initDB');
+// Conectamos a la BD 
+require('./lib_db/connectMonggose');
 
 // Rutas
 const index = require('./routes/index');
