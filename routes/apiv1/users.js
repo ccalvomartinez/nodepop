@@ -26,6 +26,7 @@ router.post('/', function (req, res, next) {
     });
 });
 
+/* GET /apiv1/users/authenticate */
 router.get('/authenticate', function (req, res, next) {
   const userData = getAuthenticationData(req.query);
   contextModel.validateUser( userData.email, userData.password)
