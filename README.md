@@ -25,6 +25,48 @@ Este comportamiento se puede modificar desde el fichero de configuracion (_./con
 * Para obtener los mensajes de error en español mandar  `culture:"es"` en la querystring o en el body del request.
  
 
+#### Modelo de datos
+
+##### User
+
+```javascript
+
+        name: {
+            type: String,
+            required:true    
+    },
+        email: {
+            type:String,
+            required: true,
+            match:/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/    
+    },
+        password: {
+            type:String,
+            required: true
+    }
+```
+
+##### Ad
+
+```javascript
+    name: {
+        type:String,
+        required:true
+    },
+    category: {
+        type:String,
+        enum:['vende','busca']    
+    },
+    price: {
+        type:Number,
+        min:1
+    },
+    picture: String,
+    tags:
+        type: Array,
+        enum:['work','lifeStyle','motor','mobile']    
+```
+
 #### Uso de la API
 El flujo de uso será el siguiente:
 
@@ -62,8 +104,12 @@ Obtendremos un _token_ que tendrán que viajar en todas las peticiones para que 
 
 **Request**
 URL: `GET http://localhost:3000/apiv1/users/authenticate`
-QueryString:`email=<email>&password=<contraseña>&culture=<culture>`
-
+QueryString:
+```javascript
+    email=<email>
+    password=<contraseña>
+    culture=<culture>
+```
 **Response**
 Content-Type: `application/json; charset=utf-8`
 Body: 
@@ -85,9 +131,82 @@ Body:
 URL: `GET http://localhost:3000/apiv1/ads/`
 QueryString:
 ```javascript
-\\Filter options
-     name=<nombre>
-     email=<email>
-     password=<contraseña>
-     culture=<culture>
+    //Filter options
+     tag=<etiqueta> //Etiqueta por la que queremos filtrar los anuncios
+     sale=<true/false> // "true" para obtener los anuncios de venta, "false" para los nuncios de búsqueda
+     name=<name> // Filtro por nombre de artículo. El nombre del artículo comenzará por la cadena <name>
+     price=<ini>-<fin> //Ver explicación de formato más abajo
+     fields=<field1>,<field2>,... // Campos de los anuncios que queremos recuperar
+     // Result options
+     start=<start> // Íncice de registro por el que queremos empezar a recibir los documentos
+     limit=<limit> //Número de registros que queremos que nos devuelvan
+     sort=<field/-field> // Campo por el que queremos ordenar. En caso de ordenación ascendente, pondremos el nombre del campo. En caso de ordenación descendente, pondremos el nombre del campo precedido por un guión.
+     culture=<en/es> // "en" para Inglés, "es" para Español.
+     //Obligatorio
+     token=<token>
+    // Formato del filtro de precio:
+    //Para precios mayores que valor1: valor1-
+    //Para precios menores que valor 1: -valor1
+    //Para precios entre valor1 y valor2: valor1.valor2
+```
+**Response**
+Content-Type: `application/json; charset=utf-8`
+Body:
+```JSON
+{
+  "success": true,
+  "result": {
+    "list": [
+      {
+        "_id": "591ae7f4d1f9842b500af1ed",
+        "name": "cillum",
+        "category": "vende",
+        "price": 335.93,
+        "picture": "http://localhost:3000/apiv1/ads/images/frigorifico.jpg",
+        "tags": [
+          "work",
+          "lifeStyle",
+          "motor"
+        ]
+      },
+      {
+        "_id": "591ae7f4d1f9842b500af1ee",
+        "name": "tempor",
+        "category": "vende",
+        "price": 60.92,
+        "picture": "http://localhost:3000/apiv1/ads/images/et.jpg",
+        "tags": [
+          "work",
+          "lifeStyle"
+        ]
+      }
+    ]
+}
+```
+##### Listado de etiquetas
+
+**Request**
+URL: `GET http://localhost:3000/apiv1/ads/tags`
+QueryString:
+```javascript
+   culture=<en/es> // "en" para Inglés, "es" para Español.
+   //Obligatorio
+    token=<token>
+```
+
+**Response**
+Content-Type: `application/json; charset=utf-8`
+Body: 
+```JSON
+{
+  "success": true,
+  "result": {
+    "listTags": [
+      "lifeStyle",
+      "motor",
+      "work"
+    ],
+    "total": 3
+  }
+}
 ```
