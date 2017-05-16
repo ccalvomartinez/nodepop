@@ -1,6 +1,7 @@
 # Nodepop
 Maqueta de api para gestión de un sitios de anuncios de venta
 La aplicación se ejecuta con express, por defecto en el puerto 3000, sobre una base de datos MongoDB.
+
 #### Base URL
 `http://localhost:3000/apiv1`
 
@@ -14,6 +15,7 @@ La autenticación se realiza mediante JWT. En el fichero de configuración (_./c
 #### Inicio de la aplicación
 1. Iniciar el servidor de base de datos de MongoDB, con el puerto por defecto (27017)
 2. Ejecutar `npm start`
+3. Para ejecutarlo en modo de depuración ejecutar `npm run dev` 
 
 El comportamiento por defecto de la aplicación es que al iniciarse, borra todos los anuncios de la base de datos (colección "Ad") y carga nuevos anuncios desde el archivo _adsInitData.json_.
 Este comportamiento se puede modificar desde el fichero de configuracion (_./config/config.js_) modificando la propiedad `loadDataToDb`.
