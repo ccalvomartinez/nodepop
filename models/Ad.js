@@ -5,20 +5,24 @@ const Schema = mongoose.Schema;
 const adSchema = new Schema({
     name: {
         type:String,
-        required:true
+        required:true,
+        index: true
     },
     category: {
         type:String,
-        enum:['vende','busca']    
+        enum:['vende','busca'],
+        index:true
     },
     price: {
         type:Number,
-        min:1
+        min:1,
+        index: true
     },
     picture: String,
     tags:[{
         type:String,
-        enum:['work','lifeStyle','motor','mobile']    
+        enum:['work','lifeStyle','motor','mobile'],
+        index: true 
     }]
     });
 
