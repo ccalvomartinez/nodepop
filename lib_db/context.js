@@ -22,7 +22,9 @@ module.exports.listAds = function (filter, options) {
             query.where('category').equals('busca');
         }
         if (filter.name) { 
-            query.where('name', new RegExp('^' + filter.nombre, 'i'));
+            console.log(filter.name);
+            console.log(new RegExp(filter.name, 'i'));
+            query.where('name',new RegExp(filter.name, 'i') );
         }
         if (filter.priceFrom) { 
             query.where('price').gt(filter.priceFrom);
