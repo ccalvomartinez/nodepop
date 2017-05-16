@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
 // primero definimos un esquema
 const adSchema = new Schema({
     name: {

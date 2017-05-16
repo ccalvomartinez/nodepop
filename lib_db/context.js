@@ -54,7 +54,10 @@ module.exports.listAds = function (filter, options) {
     }
    
 };
+module.exports.listTags = function(){
 
+   return Ad.find().distinct("tags").exec();
+};
 module.exports.setPictureUrl = function (ad, rootUrl) {
     if (ad.picture) {
         ad.picture = rootUrl + ad.picture;

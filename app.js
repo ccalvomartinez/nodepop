@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const winston = require('winston');
 
 //Configuramos la utilidad de log
-
 winston.add(winston.transports.File, {
   name: 'error-file',
   filename: './logs/errors.log',
@@ -16,6 +15,7 @@ winston.add(winston.transports.File, {
   humanReadableUnhandledException: true,
   level: 'error'
 });
+
 winston.add(winston.transports.File, {
   name: 'info-file',
   filename: './logs/info.log',
@@ -28,6 +28,7 @@ const CustomError = require('./lib/CustomError');
 //Conectamos a la base de datos y la poblamos si así lo pide el fichero de configuración
 require('./lib_db/initDB');
 
+// Rutas
 const index = require('./routes/index');
 const users = require('./routes/apiv1/users');
 const ads = require('./routes/apiv1/ads');

@@ -12,12 +12,16 @@ try {
     console.error('No se ha podido leer el fichero de configuración:', err);
     process.exit(4);
 }
+
 if (config && config.loadDataToDb) {
     const fillDB = require('./fillDB');
 
-    fillDB().then(() => { })
-        .catch(err => {
-            console.error('Error:', err);
-            process.exit(5);
+    fillDB()
+    .then(() => {
+        console.log('Datos cargados');
+     })
+    .catch(err => {
+        console.error('Error:', err);
+        process.exit(5);
     });
 } 

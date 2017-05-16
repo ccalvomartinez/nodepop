@@ -120,4 +120,22 @@ router.get('/', function (req, res, next) {
          });
 });
 
+/* GET /apiv1/ads/tags */
+router.get('/tags', function (req, res, next) {
+ 
+    contextModel.listTags().then((tags) => { 
+        
+         res.json({
+            success: true,
+            result: {
+                listTags: tags,
+                total: tags.length
+            }
+        });
+    })
+        .catch(err => {
+            next(new CustomError('Error while retrieving tags', err));
+            return;
+         });
+});
 module.exports = router;
