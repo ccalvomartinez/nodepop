@@ -1,9 +1,9 @@
 'use strict';
-// Conectamos a la BD 
+// Conectamos a la BD
 require('./connectMonggose');
 
 
-// Leer los datos del fichero de configuración rellenar la base de datos en caso 
+// Leer los datos del fichero de configuración rellenar la base de datos en caso
 //necesario
 let config;
 try {
@@ -24,4 +24,4 @@ if (config && config.loadDataToDb) {
         console.error('Error:', err);
         process.exit(5);
     });
-} 
+}

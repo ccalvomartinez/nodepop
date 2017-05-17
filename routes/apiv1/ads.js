@@ -12,7 +12,7 @@ router.use(jwtAuth);
 
 //  Util
 
-function getFilter(req) {
+function getFilter (req) {
     // Consultamos la query string para obtener los fitros
     const tag = req.query.tag;
     const sale = req.query.sale;
@@ -58,13 +58,12 @@ function getFilter(req) {
         }
     }
     if (fields) {
-        const fields_arr = fields.split(',');
-        filter.fields = fields_arr;
+            filter.fields = fields.split(',');
     }
     return filter;
 }
 
-function getOptions(req) {
+function getOptions (req) {
     const start = parseInt(req.query.start);
     const limit = parseInt(req.query.limit);
     const sort = req.query.sort;
@@ -99,18 +98,17 @@ router.get('/', function (req, res, next) {
         filter = getFilter(req);
         options = getOptions(req);
 
-    } catch (err) { 
-        
+    } catch (err) {
         next(new CustomError('Query string not valid', 409, err));
         return;
     }
 
-    contextModel.listAds(filter, options).then((datos) => { 
+    contextModel.listAds(filter, options).then((datos) => {
         const datosWithPicture = datos.map(function (ad) {
-            contextModel.setPictureUrl(ad,'http://' + req.header('host') + '/apiv1/ads/images/');
+            contextModel.setPictureUrl(ad, 'http://' + req.header('host') + '/apiv1/ads/images/');
             return ad;
         });
-        
+
          res.json({
             success: true,
             result: {
@@ -127,9 +125,9 @@ router.get('/', function (req, res, next) {
 
 /* GET /apiv1/ads/tags */
 router.get('/tags', function (req, res, next) {
- 
-    contextModel.listTags().then((tags) => { 
-        
+
+    contextModel.listTags().then((tags) => {
+
          res.json({
             success: true,
             result: {

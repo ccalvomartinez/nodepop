@@ -10,10 +10,10 @@ const winston = require('winston');
 router.post('/', function (req, res, next) {
   const userData = getUserData(req.body);
   contextModel.addUser(userData.name, userData.email, userData.password)
-    .then(user => { 
+    .then(user => {
 
         winston.info('Usuario registrado. Nombre: %s, Email: %s', user.name, user.email);
-      
+
         res.json({
           success: true,
           result: {
@@ -21,7 +21,7 @@ router.post('/', function (req, res, next) {
           }
         });
     })
-    .catch(err => { 
+    .catch(err => {
       next(new CustomError('Error while registering user', err));
     });
 });
@@ -31,9 +31,9 @@ router.get('/authenticate', function (req, res, next) {
   const userData = getAuthenticationData(req.query);
   contextModel.validateUser( userData.email, userData.password)
     .then((tokenData) => {
-      
+
       winston.info('Usuario autenticado. Nombre: %s, Email: %s', tokenData.user.name, tokenData.user.email);
- 
+
       res.json({
         success: true,
         result: {
@@ -47,18 +47,18 @@ router.get('/authenticate', function (req, res, next) {
     });
 });
 
-function getUserData(body) { 
+function getUserData (body) {
   const name = body.name;
   const email = body.email;
   const password = body.password;
 
-  if (!name) { 
+  if (!name) {
     throw new CustomError('Name cannot be empty', 409);
   }
-  if (!email) { 
+  if (!email) {
     throw new CustomError('Email cannot be empty', 409);
   }
-  if (!password) { 
+  if (!password) {
     throw new CustomError('Password cannot be empty', 409);
   }
   return {
@@ -68,7 +68,7 @@ function getUserData(body) {
   };
 }
 
-function getAuthenticationData(query) {
+function getAuthenticationData (query) {
   const email = query.email;
   const password = query.password;
 
