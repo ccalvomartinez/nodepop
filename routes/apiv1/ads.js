@@ -48,6 +48,11 @@ function getFilter(req) {
             if (priceUntil[0]) {
                 filter.priceUntil = parseInt(priceUntil[0]);
             }
+
+            if (filter.priceFrom && filter.priceUntil
+                && filter.priceFrom > filter.priceUntil) {
+                throw new CustomError('Price filter is not valid', 409);
+            }
         } else {
             throw new CustomError('Price filter is not valid', 409);
         }

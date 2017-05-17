@@ -1,12 +1,16 @@
 # Nodepop
 Maqueta de api para gestión de un sitios de anuncios de venta
 La aplicación se ejecuta con express, por defecto en el puerto 3000, sobre una base de datos MongoDB.
+Además, la aplicación usa el módulo Cluster de Nodejs para aprovechar todas las posibilidades del servidor.
 
 #### Base URL
 `http://localhost:3000/apiv1`
 
 #### Autenticación
 La autenticación se realiza mediante JWT. En el fichero de configuración (_./config/config.js_) se pueden establecer los datos necesarios para la generación de tokens.
+
+#### Log
+La aplicación realiza logs en dos ficheros: _info.log_ y _error.log_ que se encuentran en la carpeta _logs_.
 
 #### Instalación de la aplicación
 1. Descargar la aplicación.
@@ -112,6 +116,7 @@ QueryString:
     password=<contraseña>
     culture=<culture>
 ```
+Ejemplo:  http://localhost:3000/apiv1/users/authenticate?email=ccm2@ccm.com&password=123456
 **Response**
 Content-Type: `application/json; charset=utf-8`
 Body: 

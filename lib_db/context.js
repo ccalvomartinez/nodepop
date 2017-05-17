@@ -22,9 +22,7 @@ module.exports.listAds = function (filter, options) {
             query.where('category').equals('busca');
         }
         if (filter.name) { 
-            console.log(filter.name);
-            console.log(new RegExp(filter.name, 'i'));
-            query.where('name',new RegExp(filter.name, 'i') );
+            query.where('name',new RegExp('^' + filter.name, 'i'));
         }
         if (filter.priceFrom) { 
             query.where('price').gt(filter.priceFrom);
@@ -36,7 +34,7 @@ module.exports.listAds = function (filter, options) {
         //OPCIONES DE SALIDA
 
         if (options.start) { 
-            query.start(options.start);
+            query.skip(options.start);
         }        
         if (options.limit) { 
             query.limit(options.limit);

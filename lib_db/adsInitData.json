@@ -1,395 +1,51 @@
 [
   {
-    "name": "cillum",
+    "name": "Frigorifico",
     "category": "vende",
     "price": 335.93,
     "picture": "frigorifico.jpg",
     "tags": [
       "work",
-      "lifeStyle",
-      "motor"
+      "lifeStyle"
     ]
   },
   {
-    "name": "tempor",
+    "name": "Portatil",
     "category": "vende",
     "price": 60.92,
-    "picture": "et.jpg",
+    "picture": "portatil.png",
     "tags": [
-      "work",
-      "lifeStyle"
+      "work"
     ]
   },
   {
-    "name": "adipisicing",
+    "name": "Furgoneta",
     "category": "vende",
     "price": 86.02,
-    "picture": "culpa.jpg",
+    "picture": "furgoneta.jpg",
     "tags": [
       "work",
-      "lifeStyle",
       "motor"
     ]
   },
   {
-    "name": "duis",
+    "name": "Mesa conferencias",
     "category": "busca",
     "price": 69.55,
-    "picture": "quis.jpg",
+    "picture": "mesa.jpg",
     "tags": [
       "work"
     ]
   },
   {
-    "name": "occaecat",
+    "name": "Movil",
     "category": "vende",
     "price": 97.37,
-    "picture": "labore.jpg",
+    "picture": "movil.png",
     "tags": [
       "work",
       "lifeStyle",
-      "motor"
-    ]
-  },
-  {
-    "name": "anim",
-    "category": "busca",
-    "price": 141.26,
-    "picture": "ea.jpg",
-    "tags": [
-      "work",
-      "lifeStyle"
-    ]
-  },
-  {
-    "name": "sit",
-    "category": "busca",
-    "price": 436.04,
-    "picture": "laborum.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "reprehenderit",
-    "category": "vende",
-    "price": 172.58,
-    "picture": "veniam.jpg",
-    "tags": [
-      "work",
-      "lifeStyle"
-    ]
-  },
-  {
-    "name": "tempor",
-    "category": "vende",
-    "price": 37.49,
-    "picture": "anim.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "ullamco",
-    "category": "vende",
-    "price": 456.63,
-    "picture": "aliquip.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "tempor",
-    "category": "vende",
-    "price": 182.83,
-    "picture": "commodo.jpg",
-    "tags": [
-      "work",
-      "lifeStyle",
-      "motor"
-    ]
-  },
-  {
-    "name": "irure",
-    "category": "busca",
-    "price": 186.63,
-    "picture": "cupidatat.jpg",
-    "tags": [
-      "work",
-      "lifeStyle",
-      "motor"
-    ]
-  },
-  {
-    "name": "aliqua",
-    "category": "vende",
-    "price": 276.77,
-    "picture": "nulla.jpg",
-    "tags": [
-      "work",
-      "lifeStyle",
-      "motor"
-    ]
-  },
-  {
-    "name": "magna",
-    "category": "busca",
-    "price": 111.82,
-    "picture": "nisi.jpg",
-    "tags": [
-      "work",
-      "lifeStyle"
-    ]
-  },
-  {
-    "name": "elit",
-    "category": "vende",
-    "price": 155.51,
-    "picture": "ex.jpg",
-    "tags": [
-      "work",
-      "lifeStyle"
-    ]
-  },
-  {
-    "name": "mollit",
-    "category": "busca",
-    "price": 48.92,
-    "picture": "nulla.jpg",
-    "tags": [
-      "work",
-      "lifeStyle"
-    ]
-  },
-  {
-    "name": "ea",
-    "category": "vende",
-    "price": 453.18,
-    "picture": "ex.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "labore",
-    "category": "busca",
-    "price": 356.63,
-    "picture": "sunt.jpg",
-    "tags": [
-      "work",
-      "lifeStyle",
-      "motor"
-    ]
-  },
-  {
-    "name": "qui",
-    "category": "busca",
-    "price": 288.56,
-    "picture": "do.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "ut",
-    "category": "busca",
-    "price": 318.68,
-    "picture": "nulla.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "occaecat",
-    "category": "busca",
-    "price": 207.27,
-    "picture": "esse.jpg",
-    "tags": [
-      "work",
-      "lifeStyle"
-    ]
-  },
-  {
-    "name": "enim",
-    "category": "busca",
-    "price": 434.96,
-    "picture": "qui.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "qui",
-    "category": "busca",
-    "price": 190.85,
-    "picture": "laboris.jpg",
-    "tags": [
-      "work",
-      "lifeStyle",
-      "motor"
-    ]
-  },
-  {
-    "name": "non",
-    "category": "vende",
-    "price": 449.66,
-    "picture": "deserunt.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "ut",
-    "category": "vende",
-    "price": 232.61,
-    "picture": "magna.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "aliquip",
-    "category": "vende",
-    "price": 301.68,
-    "picture": "culpa.jpg",
-    "tags": [
-      "work",
-      "lifeStyle"
-    ]
-  },
-  {
-    "name": "aute",
-    "category": "vende",
-    "price": 90.97,
-    "picture": "ipsum.jpg",
-    "tags": [
-      "work",
-      "lifeStyle"
-    ]
-  },
-  {
-    "name": "ullamco",
-    "category": "vende",
-    "price": 416.11,
-    "picture": "culpa.jpg",
-    "tags": [
-      "work",
-      "lifeStyle",
-      "motor"
-    ]
-  },
-  {
-    "name": "ad",
-    "category": "vende",
-    "price": 210.12,
-    "picture": "nostrud.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "in",
-    "category": "vende",
-    "price": 431.27,
-    "picture": "eu.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "irure",
-    "category": "busca",
-    "price": 94.85,
-    "picture": "dolor.jpg",
-    "tags": [
-      "work",
-      "lifeStyle",
-      "motor"
-    ]
-  },
-  {
-    "name": "magna",
-    "category": "busca",
-    "price": 209.66,
-    "picture": "ad.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "enim",
-    "category": "busca",
-    "price": 159.29,
-    "picture": "sit.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "est",
-    "category": "busca",
-    "price": 72.42,
-    "picture": "ullamco.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "exercitation",
-    "category": "busca",
-    "price": 298.19,
-    "picture": "do.jpg",
-    "tags": [
-      "work",
-      "lifeStyle"
-    ]
-  },
-  {
-    "name": "cupidatat",
-    "category": "busca",
-    "price": 132.51,
-    "picture": "do.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "non",
-    "category": "busca",
-    "price": 417,
-    "picture": "ex.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "voluptate",
-    "category": "vende",
-    "price": 366.16,
-    "picture": "incididunt.jpg",
-    "tags": [
-      "work",
-      "lifeStyle",
-      "motor"
-    ]
-  },
-  {
-    "name": "reprehenderit",
-    "category": "vende",
-    "price": 309.27,
-    "picture": "qui.jpg",
-    "tags": [
-      "work"
-    ]
-  },
-  {
-    "name": "eiusmod",
-    "category": "vende",
-    "price": 179.17,
-    "picture": "eu.jpg",
-    "tags": [
-      "work",
-      "lifeStyle"
+      "mobile"
     ]
   }
 ]
