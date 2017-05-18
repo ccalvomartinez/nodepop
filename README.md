@@ -2,7 +2,8 @@
 Maqueta de api para gestión de un sitios de anuncios de venta
 La aplicación se ejecuta con express, por defecto en el puerto 3000, sobre una base de datos MongoDB.
 Además, la aplicación usa el módulo Cluster de Nodejs para aprovechar todas las posibilidades del servidor.
-Se pude ver la documentación del servidor en 
+
+Se pude ver la documentación de la API en https://github.com/ccalvomartinez/nodepop_doc.git
 
 #### Base URL
 `http://localhost:3000/apiv1`
