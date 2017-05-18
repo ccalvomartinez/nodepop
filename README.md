@@ -2,6 +2,7 @@
 Maqueta de api para gestión de un sitios de anuncios de venta
 La aplicación se ejecuta con express, por defecto en el puerto 3000, sobre una base de datos MongoDB.
 Además, la aplicación usa el módulo Cluster de Nodejs para aprovechar todas las posibilidades del servidor.
+Se pude ver la documentación del servidor en 
 
 #### Base URL
 `http://localhost:3000/apiv1`
@@ -117,6 +118,7 @@ QueryString:
     culture=<culture>
 ```
 Ejemplo:  http://localhost:3000/apiv1/users/authenticate?email=ccm2@ccm.com&password=123456
+
 **Response**
 Content-Type: `application/json; charset=utf-8`
 Body: 
@@ -154,7 +156,7 @@ QueryString:
     // Formato del filtro de precio:
     //Para precios mayores que valor1: valor1-
     //Para precios menores que valor 1: -valor1
-    //Para precios entre valor1 y valor2: valor1.valor2
+    //Para precios entre valor1 y valor2: valor1-valor2
 ```
 **Response**
 Content-Type: `application/json; charset=utf-8`
