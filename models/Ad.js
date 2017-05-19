@@ -24,7 +24,7 @@ const adSchema = new Schema({
         enum:['work','lifeStyle','motor','mobile'],
         index: true 
     }]
-    });
+});
 
 // Luego creamos el modelo
 

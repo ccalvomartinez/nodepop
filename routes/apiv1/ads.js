@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
             return ad;
         });
 
-         res.json({
+        res.json({
             success: true,
             result: {
                 list: datosWithPicture,
@@ -40,7 +40,7 @@ router.get('/', function (req, res, next) {
         .catch(err => {
             next(new CustomError('Error while retrieving ads', err));
             return;
-         });
+        });
 });
 
 //  Util
@@ -81,8 +81,7 @@ function getFilter (req) {
                 filter.priceUntil = parseInt(priceUntil[0]);
             }
 
-            if (filter.priceFrom && filter.priceUntil
-                && filter.priceFrom > filter.priceUntil) {
+            if (filter.priceFrom && filter.priceUntil && filter.priceFrom > filter.priceUntil) {
                 throw new CustomError('Price filter is not valid', 409);
             }
         } else {
@@ -90,7 +89,7 @@ function getFilter (req) {
         }
     }
     if (fields) {
-            filter.fields = fields.split(',');
+        filter.fields = fields.split(',');
     }
     return filter;
 }
@@ -127,7 +126,7 @@ router.get('/tags', function (req, res, next) {
 
     contextModel.listTags().then((tags) => {
 
-         res.json({
+        res.json({
             success: true,
             result: {
                 listTags: tags,
@@ -138,6 +137,6 @@ router.get('/tags', function (req, res, next) {
         .catch(err => {
             next(new CustomError('Error while retrieving tags', err));
             return;
-         });
+        });
 });
 module.exports = router;
