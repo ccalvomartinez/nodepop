@@ -1,4 +1,8 @@
 'use strict';
+
+// Logger
+const winston = require('winston');
+
 // Conectamos a la BD
 require('./connectMonggose');
 
@@ -9,7 +13,7 @@ let config;
 try {
     config = require('../config/config');
 } catch (err) {
-    console.error('No se ha podido leer el fichero de configuración:', err);
+    winston.error('No se ha podido leer el fichero de configuración:', err);
     process.exit(4);
 }
 
@@ -18,10 +22,10 @@ if (config && config.loadDataToDb) {
 
     fillDB()
     .then(() => {
-        console.log('Datos cargados');
-     })
+        winston.info('Datos cargados');
+    })
     .catch(err => {
-        console.error('Error:', err);
+        winston.error('Error:', err);
         process.exit(5);
     });
 }

@@ -1,12 +1,14 @@
 'Use strict';
 
+// Logger
+const winston = require('winston');
 // Intentamos leer el fichero de configuración.
 // Si hay un error, terminamos el programa
 let config;
 try {
     config = require('../config/config');
 } catch (err) {
-    console.error('No se ha podido leer el fichero de configuración:', err);
+    winston.error('No se ha podido leer el fichero de configuración:', err);
     process.exit(4);
 }
 
@@ -21,22 +23,22 @@ mongoose.Promise = global.Promise;
 
 // En caso de error en la conexión
 conn.on('error', (err) => {
-    console.log('Error de conexión', err);
+    winston.error('Error de conexión', err);
     process.exit(3);
 });
 
 conn.once('open', () => {
-    console.log('Conectado a MongoDB');
+    winston.info('Conectado a MongoDB');
 });
 
 // Cuando nos desconectamos
 conn.on('disconnected', function () {
-  console.log('Mongoose default connection to DB disconnected');
+    winston.info('Mongoose default connection to DB disconnected');
 });
 
 const gracefulExit = function () {
     conn.close(function () {
-        console.log('Mongoose default connection with DB is disconnected through app termination');
+        winston.info('Mongoose default connection with DB is disconnected through app termination');
         process.exit(0);
     });
 };
