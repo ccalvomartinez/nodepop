@@ -22,7 +22,7 @@ La aplicación realiza logs en dos ficheros: _info.log_ y _error.log_ que se enc
 #### Inicio de la aplicación
 1. Iniciar el servidor de base de datos de MongoDB, con el puerto por defecto (27017)
 2. Ejecutar `npm start`
-3. Para ejecutarlo en modo de depuración ejecutar `npm run dev` 
+3. Para ejecutarlo en modo de depuración ejecutar `npm run dev` (es necesario instalar las dependencias de desarrollo `npm install --dev`)
 
 El comportamiento por defecto de la aplicación es que al iniciarse, borra todos los anuncios de la base de datos (colección "Ad") y carga nuevos anuncios desde el archivo _adsInitData.json_.
 Este comportamiento se puede modificar desde el fichero de configuracion (_./config/config.js_) modificando la propiedad `loadDataToDb`.
