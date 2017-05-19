@@ -5,7 +5,7 @@ const Ad = require('../models/Ad');
 const User = require('../models/User');
 const CustomError = require('../lib/CustomError');
 const cryptografy = require('../lib/cryptografy');
-
+// Ads
 module.exports.listAds = function (filter, options) { 
     try { 
 
@@ -58,6 +58,7 @@ module.exports.listTags = function(){
 
    return Ad.find().distinct("tags").exec();
 };
+
 module.exports.setPictureUrl = function (ad, rootUrl) {
     if (ad.picture) {
         ad.picture = rootUrl + ad.picture;
@@ -65,6 +66,7 @@ module.exports.setPictureUrl = function (ad, rootUrl) {
     return ad;
 };
 
+// Users
 module.exports.addUser = async function (name, email, password) {
     let passwordHashed = await cryptografy.getHash(password);
     const user = new User({
@@ -91,7 +93,6 @@ module.exports.addUser = async function (name, email, password) {
     return createdUser;
   
 };
-
 
 module.exports.validateUser = async function (email, password) { 
     const user = await User.findOne({ email: email });

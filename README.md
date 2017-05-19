@@ -1,6 +1,7 @@
 # Nodepop
 Maqueta de api para gestión de un sitios de anuncios de venta
 La aplicación se ejecuta con express, por defecto en el puerto 3000, sobre una base de datos MongoDB.
+La base de datos se llamará, por defecto _cursonode_. Este comportamiento se puede modificar desde el fichero de configuracion (_./config/config.js_) modificando la propiedad `dbName`.
 Además, la aplicación usa el módulo Cluster de Nodejs para aprovechar todas las posibilidades del servidor.
 
 Se pude ver la documentación de la API en https://github.com/ccalvomartinez/nodepop_doc.git

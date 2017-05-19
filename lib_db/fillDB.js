@@ -4,7 +4,7 @@ require('./connectMonggose');
 const Ad = require('../models/Ad');
 
 //Controlaremos los errores a la salida de este método.
-module.exports = async function () {
+module.exports = async function populateBD() {
     // Leer ficheros
     const ads = require('./adsInitData.json');
 

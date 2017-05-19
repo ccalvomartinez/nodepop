@@ -8,7 +8,9 @@ const winston = require('winston');
 
 /* POST /apiv1/users */
 router.post('/', function (req, res, next) {
+  
   const userData = getUserData(req.body);
+
   contextModel.addUser(userData.name, userData.email, userData.password)
     .then(user => {
 
@@ -23,27 +25,6 @@ router.post('/', function (req, res, next) {
     })
     .catch(err => {
       next(new CustomError('Error while registering user', err));
-    });
-});
-
-/* GET /apiv1/users/authenticate */
-router.get('/authenticate', function (req, res, next) {
-  const userData = getAuthenticationData(req.query);
-  contextModel.validateUser( userData.email, userData.password)
-    .then((tokenData) => {
-
-      winston.info('Usuario autenticado. Nombre: %s, Email: %s', tokenData.user.name, tokenData.user.email);
-
-      res.json({
-        success: true,
-        result: {
-          user: tokenData.user,
-          token: tokenData.token
-        }
-      });
-    })
-    .catch(err => {
-      next(new CustomError('Error while authenticating user', err));
     });
 });
 
@@ -68,6 +49,28 @@ function getUserData (body) {
   };
 }
 
+/* GET /apiv1/users/authenticate */
+router.get('/authenticate', function (req, res, next) {
+  const userData = getAuthenticationData(req.query);
+  
+  contextModel.validateUser( userData.email, userData.password)
+    .then((tokenData) => {
+
+      winston.info('Usuario autenticado. Nombre: %s, Email: %s', tokenData.user.name, tokenData.user.email);
+
+      res.json({
+        success: true,
+        result: {
+          user: tokenData.user,
+          token: tokenData.token
+        }
+      });
+    })
+    .catch(err => {
+      next(new CustomError('Error while authenticating user', err));
+    });
+});
+
 function getAuthenticationData (query) {
   const email = query.email;
   const password = query.password;
@@ -83,4 +86,5 @@ function getAuthenticationData (query) {
     password: password
   };
 }
+
 module.exports = router;

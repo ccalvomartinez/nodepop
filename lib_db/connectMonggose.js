@@ -1,4 +1,16 @@
 'Use strict';
+
+// Intentamos leer el fichero de configuración.
+// Si hay un error, terminamos el programa
+let config;
+try {
+    config = require('../config/config');
+} catch (err) {
+    console.error('No se ha podido leer el fichero de configuración:', err);
+    process.exit(4);
+}
+
+// CONEXIÓN CON MONGO
 const mongoose = require('mongoose');
 
 //Obtenemos el objeto conexión
@@ -6,6 +18,8 @@ const conn = mongoose.connection;
 // Le decimos a mongoose qué librería de promesas vamos a utilizar
 mongoose.Promise = global.Promise;
 // Nos suscribimos a los eventos que nos interesan
+
+// En caso de error en la conexión
 conn.on('error', (err) => {
     console.log('Error de conexión', err);
     process.exit(3);
@@ -15,9 +29,9 @@ conn.once('open', () => {
     console.log('Conectado a MongoDB');
 });
 
-// When the connection is disconnected
+// Cuando nos desconectamos
 conn.on('disconnected', function () {
- // console.log('Mongoose default connection to DB :' + db_server + ' disconnected');
+  console.log('Mongoose default connection to DB disconnected');
 });
 
 const gracefulExit = function () {
@@ -27,10 +41,14 @@ const gracefulExit = function () {
     });
 };
 
-// If the Node process ends, close the Mongoose connection
+// Si termina el proceso de Node, cerramos la conexión
 process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 
 // Conectamos
-mongoose.connect('mongodb://localhost/cursonode');
+if (config.dbName){
+    mongoose.connect('mongodb://localhost/' + config.dbName);
+}else{
+    mongoose.connect('mongodb://localhost/cursonode');
+}
 
 

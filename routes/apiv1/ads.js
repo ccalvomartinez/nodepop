@@ -10,8 +10,40 @@ const jwtAuth = require('../../lib/jwtAuth');
 
 router.use(jwtAuth);
 
-//  Util
+/* GET /apiv1/ads */
+router.get('/', function (req, res, next) {
+    let filter;
+    let options;
+    try {
+        filter = getFilter(req);
+        options = getOptions(req);
 
+    } catch (err) {
+        next(new CustomError('Query string not valid', 409, err));
+        return;
+    }
+
+    contextModel.listAds(filter, options).then((datos) => {
+        const datosWithPicture = datos.map(function (ad) {
+            contextModel.setPictureUrl(ad, 'http://' + req.header('host') + '/apiv1/ads/images/');
+            return ad;
+        });
+
+         res.json({
+            success: true,
+            result: {
+                list: datosWithPicture,
+                total: datosWithPicture.length
+            }
+        });
+    })
+        .catch(err => {
+            next(new CustomError('Error while retrieving ads', err));
+            return;
+         });
+});
+
+//  Util
 function getFilter (req) {
     // Consultamos la query string para obtener los fitros
     const tag = req.query.tag;
@@ -89,39 +121,6 @@ function getOptions (req) {
 
     return options;
 }
-
-/* GET /apiv1/ads */
-router.get('/', function (req, res, next) {
-    let filter;
-    let options;
-    try {
-        filter = getFilter(req);
-        options = getOptions(req);
-
-    } catch (err) {
-        next(new CustomError('Query string not valid', 409, err));
-        return;
-    }
-
-    contextModel.listAds(filter, options).then((datos) => {
-        const datosWithPicture = datos.map(function (ad) {
-            contextModel.setPictureUrl(ad, 'http://' + req.header('host') + '/apiv1/ads/images/');
-            return ad;
-        });
-
-         res.json({
-            success: true,
-            result: {
-                list: datosWithPicture,
-                total: datosWithPicture.length
-            }
-        });
-    })
-        .catch(err => {
-            next(new CustomError('Error while retrieving ads', err));
-            return;
-         });
-});
 
 /* GET /apiv1/ads/tags */
 router.get('/tags', function (req, res, next) {
