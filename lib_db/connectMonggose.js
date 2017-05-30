@@ -47,10 +47,23 @@ const gracefulExit = function () {
 process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 
 // Conectamos
-if (config.dbName){
-    mongoose.connect('mongodb://localhost/' + config.dbName);
+let connectionString = '';
+if (config.mongoURI){
+    connectionString = config.mongoURI;
 }else{
-    mongoose.connect('mongodb://localhost/cursonode');
+    connectionString='mongodb://';
+    if (config.mongoConf.user){
+        connectionString += config.mongoConf.user + ':' + config.mongoConf.password;
+    }
+
+    connectionString += 'localhost/';
+    if (config.mongoConf.dbName){
+        connectionString += config.mongoConf.dbName;
+    }else{
+        connectionString += 'nodepop';
+    }
 }
+console.log(connectionString);
+  mongoose.connect(connectionString);
 
 
