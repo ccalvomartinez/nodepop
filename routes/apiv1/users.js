@@ -5,11 +5,16 @@ const router = express.Router();
 const CustomError = require('../../lib/CustomError');
 const contextModel = require('../../lib_db/context');
 const winston = require('winston');
+const middlewareUtils = require('../../lib/middlewareUtils');
 
 /* POST /apiv1/users */
 router.post('/', function (req, res, next) {
   
+<<<<<<< HEAD
     const userData = getUserData(req.body);
+=======
+  const userData = middlewareUtils.getUserData(req.body);
+>>>>>>> ccd06473b8ab16c0c58812faf7a2dec3dd6fb5be
 
     contextModel.addUser(userData.name, userData.email, userData.password)
     .then(user => {
@@ -28,6 +33,7 @@ router.post('/', function (req, res, next) {
     });
 });
 
+<<<<<<< HEAD
 function getUserData (body) {
     const name = body.name;
     const email = body.email;
@@ -52,6 +58,13 @@ function getUserData (body) {
 /* GET /apiv1/users/authenticate */
 router.get('/authenticate', function (req, res, next) {
     const userData = getAuthenticationData(req.query);
+=======
+
+
+/* GET /apiv1/users/authenticate */
+router.get('/authenticate', function (req, res, next) {
+  const userData = middlewareUtils.getAuthenticationData(req.query);
+>>>>>>> ccd06473b8ab16c0c58812faf7a2dec3dd6fb5be
   
     contextModel.validateUser( userData.email, userData.password)
     .then((tokenData) => {
@@ -71,6 +84,7 @@ router.get('/authenticate', function (req, res, next) {
     });
 });
 
+<<<<<<< HEAD
 function getAuthenticationData (query) {
     const email = query.email;
     const password = query.password;
@@ -86,5 +100,8 @@ function getAuthenticationData (query) {
         password: password
     };
 }
+=======
+
+>>>>>>> ccd06473b8ab16c0c58812faf7a2dec3dd6fb5be
 
 module.exports = router;

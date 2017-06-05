@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const contextModel = require('../../lib_db/context');
 const CustomError = require('../../lib/CustomError');
+const middlewareUtils = require('../../lib/middlewareUtils');
 
 // AUTENTICACIÓN JWT
 const jwtAuth = require('../../lib/jwtAuth');
@@ -15,8 +16,8 @@ router.get('/', function (req, res, next) {
     let filter;
     let options;
     try {
-        filter = getFilter(req);
-        options = getOptions(req);
+        filter = middlewareUtils.getFilter(req);
+        options = middlewareUtils.getOptions(req);
 
     } catch (err) {
         next(new CustomError('Query string not valid', 409, err));
@@ -43,15 +44,8 @@ router.get('/', function (req, res, next) {
         });
 });
 
-//  Util
-function getFilter (req) {
-    // Consultamos la query string para obtener los fitros
-    const tag = req.query.tag;
-    const sale = req.query.sale;
-    const name = req.query.name;
-    const price = req.query.price;
-    const fields = req.query.fields;
 
+<<<<<<< HEAD
     let filter = {};
     if (tag) {
         filter.tag = tag;
@@ -120,6 +114,8 @@ function getOptions (req) {
 
     return options;
 }
+=======
+>>>>>>> ccd06473b8ab16c0c58812faf7a2dec3dd6fb5be
 
 /* GET /apiv1/ads/tags */
 router.get('/tags', function (req, res, next) {
