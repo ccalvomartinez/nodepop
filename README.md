@@ -1,4 +1,19 @@
 # Nodepop
+
+------
+
+## DevOps
+
+La aplicación está desplegada en https://carolinacalvo.es
+
+La documentación de la aplicación está desplegada en https://documentacion.carolinacalvo.es
+
+Los archivos de imagen de la aplicación los sirve Nginx, por ejemplo, https://carolinacalvo.es/apiv1/ads/images/frigorifico.jpg
+
+Los archivos estáticos de la documentación de la aplicación también los sirve Nginx.
+
+-------
+
 Maqueta de api para gestión de un sitio de anuncios de venta y compra.
 
 La aplicación se ejecuta con express, por defecto en el puerto 3000, sobre una base de datos MongoDB.
